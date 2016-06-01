@@ -1,4 +1,8 @@
+from __future__ import print_function
+
 ID,FORM,LEMMA,CPOS,POS,FEAT,HEAD,DEPREL,DEPS,MISC=range(10)
+
+allowed_pos="ADJ,ADV,INTJ,NOUN,PROPN,VERB,ADP,AUX,CONJ,DET,NUM,PRON,SONJ,PUNCT,SYM,X".split(",")
 
 
 def read_conllu(f):

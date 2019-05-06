@@ -1,9 +1,9 @@
 from __future__ import print_function
 
-ID,FORM,LEMMA,CPOS,POS,FEAT,HEAD,DEPREL,DEPS,MISC=range(10)
-
 allowed_pos="ADJ,ADV,INTJ,NOUN,PROPN,VERB,ADP,AUX,CONJ,DET,NUM,PRON,SONJ,PUNCT,SYM,X".split(",")
 
+
+ID,FORM,LEMMA,UPOS,XPOS,FEAT,HEAD,DEPREL,DEPS,MISC=range(10)
 
 def read_conllu(f):
     sent=[]
@@ -22,6 +22,16 @@ def read_conllu(f):
     else:
         if sent:
             yield comment, sent
+
+# Usage:
+# import sys
+# for comments, sentence in read_conllu(sys.stdin):
+#   for comment in comments:
+#       print(comment)
+#   for token in sentence:
+#       print(token[LEMMA]) # print only lemma
+#   print("")
+
 
 
 def sort_features(features):
@@ -45,7 +55,7 @@ def conll09_to_conllu(sent):
         new[ID]=line[0]
         new[FORM]=line[1]
         new[LEMMA]=line[2]
-        new[CPOS],new[POS]=line[4],line[4]
+        new[UPOS],new[XPOS]=line[4],line[4]
         new[FEAT]=sort_features(line[6])
         new[HEAD]=line[8]
         new[DEPREL]=line[10]
@@ -63,7 +73,7 @@ def conll09_to_conllu_no_features(sent):
         new[ID]=line[0]
         new[FORM]=line[1]
         new[LEMMA]=line[2]
-        new[CPOS],new[POS]=line[4],line[4]
+        new[UPOS],new[XPOS]=line[4],line[4]
         new[FEAT]=line[6]
         new[HEAD]=line[8]
         new[DEPREL]=line[10]
